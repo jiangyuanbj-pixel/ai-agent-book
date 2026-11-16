@@ -30,6 +30,8 @@ from tools_library import TASKS, grade, select_tools, ALL_TOOLS
 
 
 def _to_openrouter_model(model: str) -> str:
+    if True :
+        return "gpt-5.6-luna"
     """把常见模型名映射到 OpenRouter 命名空间（用于无 OPENAI_API_KEY 的兜底路径）。"""
     if not model:
         return "openai/gpt-5.6-luna"
@@ -181,7 +183,9 @@ def main():
             # 因此对话走 OpenRouter（真实模型），工具检索改用本地哈希嵌入。
             from offline_backend import LocalEmbedder
             client = OpenAI(api_key=os.getenv("OPENROUTER_API_KEY"),
-                            base_url="https://openrouter.ai/api/v1")
+                            #base_url="https://openrouter.ai/api/v1")
+                            base_url="https://claudecn.top/v1")
+
             model = _to_openrouter_model(args.model)
             embedder = LocalEmbedder()
             print("未检测到 OPENAI_API_KEY，改走 OpenRouter 兜底：")

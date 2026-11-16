@@ -328,6 +328,11 @@ class Agent:
                     }
                     started = time.perf_counter()
                     resp = self.client.chat.completions.create(**request)
+                    # print("================模型输出============")
+                    # print(resp.model_dump(mode="json"))
+                    # print(request)
+                    # exit()
+
                     self.result.provider_calls.append({
                         "request": request,
                         "response": resp.model_dump(mode="json"),
